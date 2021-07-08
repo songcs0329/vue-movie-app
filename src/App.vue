@@ -1,30 +1,26 @@
 <template>
-  <div>asdasd</div>
+  <Loading v-if="loading"></Loading>
+  <router-view></router-view>
 </template>
 
 <script>
-import { defineComponent, getCurrentInstance, ref } from '@vue/runtime-core';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex'
+import Loading from '@/layouts/Loading'
+import { computed } from '@vue/runtime-core'
 
-export default defineComponent({
+export default {
   name: 'App',
+  components: {
+    Loading
+  },
   setup() {
-    const { appContext } = getCurrentInstance()
-    const _plugins = appContext.app.config.globalProperties
-    // const date = ref(_plugins.$getLatest())
-    const options = ref("daily")
+    const store = useStore()
+    const loading = computed(() => store.state.loading)
 
-    const fetchData = async () => {
-      return await _plugins.$asyncData("", options.value, _plugins.$getMoviesDay)
+    return {
+      loading
     }
-    console.log(fetchData());
-
-    // return {
-    //   store,
-    //   date,
-    //   options
-    // }
   }
-})
+}
 </script>
 

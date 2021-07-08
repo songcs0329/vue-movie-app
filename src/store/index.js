@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 
-export default createStore({
+const store = createStore({
   state() {
     return {
       loading: false,
@@ -27,3 +27,5 @@ export default createStore({
     showError: ({ commit }, payload) => commit("ERROR", payload.error)
   }
 })
+
+export default store
