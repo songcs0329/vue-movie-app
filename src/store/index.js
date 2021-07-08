@@ -11,12 +11,10 @@ const store = createStore({
   mutations: {
     LOADING: state => state.loading = true,
     GET_MOVIES: (state, payload) => {
-      console.log('mutations', payload)
       state.loading = false
       state.movies = payload
     },
     ERROR: (state, payload) => {
-      console.log('mutations', payload)
       state.loading = false
       state.error = payload
     }

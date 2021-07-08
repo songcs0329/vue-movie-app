@@ -5,7 +5,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import Loading from '@/layouts/Loading'
+import Loading from '@/components/Loading.vue'
 import { computed } from '@vue/runtime-core'
 
 export default {

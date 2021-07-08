@@ -11,7 +11,7 @@
         </select>
       </span>
       <span class="ip">
-        <input v-model="date" type="text" />
+        <input v-model="date" type="text" :placeholder="today" />
       </span>
     </div>
     <button type="submit" class="submit_btn" @click.prevent="searchMovieSubmit">검색</button>
@@ -22,11 +22,13 @@
 
 <script>
 import { defineComponent, getCurrentInstance, ref } from '@vue/runtime-core'
+
 export default defineComponent({
   name: 'movieSearch',
   setup() {
     const { appContext } = getCurrentInstance()
     const _plugins = appContext.app.config.globalProperties
+    const today = `날짜를 입력해주세요. (ex. ${_plugins.$getLatest()})`
     const date = ref('')
     const selected = ref(null)
     const options = [
@@ -43,6 +45,7 @@ export default defineComponent({
     const searchMovieSubmit = () => _plugins.$asyncData(date.value, selected.value, _plugins.$getMoviesDay)
 
     return {
+      today,
       date,
       selected,
       options,
