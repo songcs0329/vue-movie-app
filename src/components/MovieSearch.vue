@@ -22,10 +22,12 @@
 
 <script>
 import { defineComponent, getCurrentInstance, ref } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'movieSearch',
   setup() {
+    const store = useStore()
     const { appContext } = getCurrentInstance()
     const _plugins = appContext.app.config.globalProperties
     const today = `날짜를 입력해주세요. (ex. ${_plugins.$getLatest()})`
@@ -42,7 +44,24 @@ export default defineComponent({
       },
     ]
 
-    const searchMovieSubmit = () => _plugins.$asyncData(date.value, selected.value, _plugins.$getMoviesDay)
+    const asyncData = async () => {
+      if(selected.value === 'daily') return await _plugins.$getMoviesDay(date.value)
+      if(selected.value === 'weekly') return await _plugins.$getMoviesWeek(date.value)
+    }
+
+    const searchMovieSubmit = async () => {
+      if(!selected.value) return alert(`옵션을 선택해주세요`)
+      if(date.value.length < 8 || isNaN(Number(date.value))) return alert(`날짜를 확인해주세요`)
+      store.dispatch('showLoading')
+      try {
+        const res = await asyncData()
+        const resultList = `${selected.value}BoxOfficeList`
+        store.dispatch('getMovies', {movies: res.boxOfficeResult[resultList]})
+      } catch(e) {
+        console.log(e)
+        store.dispatch('showError', {error: e})
+      }
+    }
 
     return {
       today,

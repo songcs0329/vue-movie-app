@@ -10,7 +10,7 @@ const routes = [
   },
   {
     name: 'MovieDetailWrap',
-    path: '/detail/:moiveCd',
+    path: '/detail/:movieCd',
     component: MovieDetailWrap
   }
 ]

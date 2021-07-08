@@ -50,31 +50,29 @@
 }
 
 .movie {
-  &_list {
-    width: 80%;
+  &_wrap {
+    width: 85%;
     margin: 0 auto;
-    padding: 110px 20px 40px;
+    border: 1px solid #aaa;
+  }
+  &_list {
+    padding: 40px 20px;
   }
   &_search {
-    width: 80%;
-    // position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #222;
     display: flex;
+    padding: 20px;
     align-items: center;
     justify-content: space-between;
     z-index: 10;
+    background-color: #009b77;
+    border-bottom: 5px solid #222;
     .submit_btn {
       width: 60px;
       padding: 8px;
       color: #fff;
       font-weight: bold;
       font-size: 16px;
-      background-color: #009b77;
+      background-color: #222;
     }
     .insert {
       width: calc(100% - 60px);

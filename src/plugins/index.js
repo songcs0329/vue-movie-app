@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from '@/store'
 
 const API_KEY = '5e73ff3594cdc51745acdfcbbb5063a8'
 
@@ -15,18 +14,6 @@ export default {
         let day = ("0" + (today.getDate() - 1)).slice(-2) // 일
 
         return year + month + day
-      },
-      $asyncData: async (date, options, callback) => {
-        if(date.length < 8 || isNaN(Number(date))) return alert(`날짜를 확인해주세요`)
-        store.dispatch('showLoading')
-        try {
-          const res = await callback(date)
-          const resultList = `${options}BoxOfficeList`
-          store.dispatch('getMovies', {movies: res.boxOfficeResult[resultList]})
-        } catch(e) {
-          console.log(e)
-          store.dispatch('showError', {error: e})
-        }
       },
       $getMoviesDay: async date => {
         const targetDate = date
