@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>asdasd</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { defineComponent, getCurrentInstance, ref } from '@vue/runtime-core';
+// import { useStore } from 'vuex';
 
-export default {
+export default defineComponent({
   name: 'App',
-  components: {
-    HelloWorld
+  setup() {
+    const { appContext } = getCurrentInstance()
+    const _plugins = appContext.app.config.globalProperties
+    // const date = ref(_plugins.$getLatest())
+    const options = ref("daily")
+
+    const fetchData = async () => {
+      return await _plugins.$asyncData("", options.value, _plugins.$getMoviesDay)
+    }
+    console.log(fetchData());
+
+    // return {
+    //   store,
+    //   date,
+    //   options
+    // }
   }
-}
+})
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
