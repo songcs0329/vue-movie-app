@@ -1,9 +1,10 @@
 <template>
   <li v-for="movie in movies" :key="movie.rnum" class="movie_item">
     <router-link :to="toPath(movie.movieCd)">
-      <label :class="movie.rankOldAndNew.toLowerCase()">{{ movie.rankOldAndNew.charAt(0) }}</label>
-      <div class="item_info"><strong>{{ movie.rank }}</strong><br/>{{ movie.movieNm }}</div>
-      <div :class="rateCheck(movie.audiChange)">
+      <div class="item_info">
+        <strong :class="newCheck(movie.rankOldAndNew)">{{ movie.rank }}</strong><br/>{{ movie.movieNm }}
+      </div>
+      <div :class="audiCheck(movie.audiChange)">
         <span>관객수 : {{ comma(movie.audiAcc) }}명<b class="per">{{ movie.audiChange }}</b></span>
         <span>매출액 : {{ comma(movie.salesAcc) }}명<b class="per">{{ movie.salesChange }}</b></span>
       </div>
@@ -34,7 +35,8 @@ export default {
         movieCd
       }
     }),
-    rateCheck: audiChange => `item_rate ${audiChange > 0 ? "up" : "down"}`
+    audiCheck: audiChange => `item_rate ${audiChange > 0 ? "up" : "down"}`,
+    newCheck: rankOldAndNew => rankOldAndNew === "NEW" && "new"
   }
 }
 </script>

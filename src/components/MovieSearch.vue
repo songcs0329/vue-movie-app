@@ -57,9 +57,11 @@ export default defineComponent({
         const res = await asyncData()
         const resultList = `${selected.value}BoxOfficeList`
         store.dispatch('getMovies', {movies: res.boxOfficeResult[resultList]})
+        store.dispatch('showLoading')
       } catch(e) {
         console.log(e)
         store.dispatch('showError', {error: e})
+        store.dispatch('showLoading')
       }
     }
 

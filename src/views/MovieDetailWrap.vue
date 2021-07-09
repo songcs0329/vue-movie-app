@@ -1,12 +1,15 @@
 <template>
-  <div>
-    movieDetail
-  </div>
+  <MovieDetail />
 </template>
 
 <script>
-export default {
+import MovieDetail from '@/components/MovieDetail.vue'
 
+export default {
+  name: 'MovieDetailWrap',
+  components: {
+    MovieDetail,
+  },
 }
 </script>
 

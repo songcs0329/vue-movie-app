@@ -9,19 +9,15 @@ const store = createStore({
     }
   },
   mutations: {
-    LOADING: state => state.loading = true,
-    GET_MOVIES: (state, payload) => {
-      state.loading = false
-      state.movies = payload
-    },
-    ERROR: (state, payload) => {
-      state.loading = false
-      state.error = payload
-    }
+    LOADING: state => state.loading = !state.loading,
+    GET_MOVIES: (state, payload) => state.movies = payload,
+    CLEAR_MOVIES: state => state.movies = [],
+    ERROR: (state, payload) => state.error = payload
   },
   actions: {
     showLoading: ({ commit }) => commit("LOADING"),
     getMovies: ({ commit }, payload) => commit("GET_MOVIES", payload.movies),
+    clearMovies: ({ commit }) => commit("CLEAR_MOVIES"),
     showError: ({ commit }, payload) => commit("ERROR", payload.error)
   }
 })
