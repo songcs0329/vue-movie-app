@@ -1,8 +1,6 @@
 <template>
-  <div class="movie_wrap">
-    <MovieSearch />
-    <MoviesList />
-  </div>
+  <MovieSearch />
+  <MoviesList />
 </template>
 
 <script>
